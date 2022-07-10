@@ -1,0 +1,126 @@
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+body {
+    margin: 0;
+    padding: 0;
+}
+.content {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-image: url('tom-barrett-hgGplX3PFBg-unsplash.jpg');
+    background-size: cover;
+}
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+.header {
+    width: 100%;
+    height: 4rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 0.8rem;
+    text-align: center;
+    background-color: black;
+    color: rgb(243, 201, 146);
+}
+.search-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search-container > div {
+    padding: 0.8rem;
+
+}
+label {
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+input[type="text"] {
+    font-size: 1.5rem;
+    width: 14rem;
+    background-color: black;
+    color: white;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(88, 88, 88);
+    opacity: 0.7;
+    transition: 0.2s;
+}
+input[type="text"]:focus {
+    opacity: 0.9;
+    outline: none;
+    box-shadow: 0 0 8px 2px rgb(248, 119, 68);
+    opacity: 1;
+}
+select {
+    font-size: 1.5rem;
+    background-color: black;
+    color: white;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(88, 88, 88);
+    opacity: 0.7;
+    width: 14rem;
+    transition: 0.1s;
+}
+select:active {
+    border: 2px solid white;
+    outline: none;
+    border: 2px solid white;
+    opacity: 1;
+
+}
+.submit-button {
+    background-color: rgb(3, 68, 153);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1ch;
+    padding: 0.4rem;
+    width: 14rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 3px 3px 10px rgb(0, 0, 0);
+    transition: 0.3s;
+}
+.submit-button:hover {
+    background-color: rgb(3, 103, 233);
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+.weather-data {
+    width: 100%;
+    height: 12rem;
+    font-size: 2rem;
+    background-color: rgb(49, 49, 49);
+    color: white;
+    opacity: 0.7;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+
+/* mobile layout */
+@media only screen and (max-width: 400px) {
+    .humidity{
+        width: 47%;
+    }
+    .wind {
+        width: 47%;
+    }
+
+}
