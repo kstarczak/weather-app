@@ -16,12 +16,6 @@ body {
     background-image: url('tom-barrett-hgGplX3PFBg-unsplash.jpg');
     background-size: cover;
 }
-.main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
-}
 .header {
     width: 100%;
     height: 4rem;
@@ -98,6 +92,19 @@ select:active {
     transform: translateY(-3px);
     cursor: pointer;
 }
+.main {
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr/ 1fr 1fr;
+    grid-template-areas:
+        "temp grraphic"
+        "temp rain"
+        "temp wind"
+        "hilo humidity"
+    ;
+    gap: 1rem;
+    padding: 1rem;
+}
+/* applies to all weather data that is requested
 .weather-data {
     width: 100%;
     height: 12rem;
@@ -112,15 +119,27 @@ select:active {
     text-align: center;
     padding: 0 1rem;
 }
-
-
-/* mobile layout */
-@media only screen and (max-width: 400px) {
-    .humidity{
-        width: 47%;
-    }
-    .wind {
-        width: 47%;
-    }
-
+*/
+.temperature {
+    grid-area: temp;
 }
+.hilo-container {
+    grid-area: hilo;
+    display: flex;
+    justify-content: center;
+}
+.weather-graphic {
+    grid-area: graphic;
+}
+.rain {
+    grid-area: rain;
+}
+.wind {
+    grid-area: wind;
+}
+.humidity {
+    grid-area: humidity;
+}
+
+
+

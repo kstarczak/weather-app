@@ -54,6 +54,15 @@ const usStates = ['AK - Alaska',
   'WV - West Virginia',
   'WY - Wyoming'];
 
-const lowerCaseStates = usStates.map((state) => state.slice(5).toLowerCase());
+const weatherConditions = [
+  'Thunderstorm',
+  'Drizzle',
+  'Rain',
+  'Snow',
+  'Clear',
+  'Clouds'];
 
-export { usStates, lowerCaseStates };
+const lowerCaseStates = usStates.map((state) => state.slice(5).toLowerCase());
+const abrvStates = usStates.map((state) => state.slice(0, 2));
+
+export { abrvStates, lowerCaseStates, weatherConditions };

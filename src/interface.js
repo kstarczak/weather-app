@@ -1,4 +1,4 @@
-import { usStates, lowerCaseStates } from './data';
+import { abrvStates, lowerCaseStates, weatherConditions } from './data';
 
 const loadPage = () => {
   const content = document.createElement('div');
@@ -31,7 +31,7 @@ const loadPage = () => {
 
   const stateInput = document.createElement('select');
   stateInput.id = 'state-input';
-  usStates.forEach((state, i) => {
+  abrvStates.forEach((state, i) => {
     const stateOption = document.createElement('option');
     stateOption.textContent = state;
     stateOption.value = lowerCaseStates[i];
@@ -61,8 +61,11 @@ const loadPage = () => {
 
   main.append(temperature, humidity, wind);
 
+  const footer = document.createElement('footer');
+  footer.textContent = ''
+
   document.querySelector('body').appendChild(content);
-  content.append(header, searchContainer, main);
+  content.append(header, searchContainer, main, footer);
 };
 
 const updatePage = (data) => {
@@ -74,13 +77,31 @@ const updatePage = (data) => {
   const hiTemp = Math.round((tempData.main.temp_max - 273) * (9 / 5) + 32);
   temperature.textContent = `${currentTemp} \u00B0 F (low of ${lowTemp} \u00B0 F, high of ${hiTemp} \u00B0 F)`;
 
-  const humidity = document.querySelector('.humidity');
-  const currentHumidity = data.main.humidity;
-  humidity.textContent = `Humidity: ${currentHumidity}`;
+  const currentConditions = data.weather[0];
+  const currentConditionsMain = currentConditions.main;
+  const currentConditionsDesc = currentConditions.description;
+  let outputConditions;
+  switch (currentConditionsMain) {
+    case 'Thunderstorm':
+      outputConditions = 'Thunderstorms';
+      break;
+    case 'Drizzle':
+      outputConditions = 'Light Rain';
+      break;
+    default:
+      outputConditions = currentConditionsDesc;
+  };
+
+  // assign textContent with output conditions;
 
   const wind = document.querySelector('.wind');
   const currentWind = data.wind.speed;
+  // add logic to make and arrow correlate to ...const currentWindDir = data.wind.deg;
   wind.textContent = `Wind: ${currentWind} kph`;
+
+  const humidity = document.querySelector('.humidity');
+  const currentHumidity = data.main.humidity;
+  humidity.textContent = `Humidity: ${currentHumidity}`;
 };
 
 export { loadPage, updatePage };

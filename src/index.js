@@ -2,6 +2,13 @@ import './style.css';
 import { loadPage, updatePage } from './interface';
 
 loadPage();
+/*
+function dayOrNight(sunrise, sunset) {
+  const currentTime = new Date();
+  if (currentTime > sunrise && currentTime <)
+
+}
+*/
 
 function showError(message) {
   const allWeatherData = document.querySelectorAll('.weather-data');
@@ -22,7 +29,7 @@ function submitWeatherRequest() {
   const cityInput = document.getElementById('city-input');
   const city = cityInput.value.toLowerCase();
   if (city.length < 1) {
-    showError('Please enter a city name');
+    showError('Please enter a valid city name');
   } else {
     const stateInput = document.getElementById('state-input');
     const state = stateInput.value;
