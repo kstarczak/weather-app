@@ -1,14 +1,8 @@
 import './style.css';
-import { loadPage, updatePage } from './interface';
+import loadPage from './loadPage';
+import { updatePage, getUserPrefUnits } from './interface';
 
 loadPage();
-/*
-function dayOrNight(sunrise, sunset) {
-  const currentTime = new Date();
-  if (currentTime > sunrise && currentTime <)
-
-}
-*/
 
 function showError(message) {
   const allWeatherData = document.querySelectorAll('.weather-data');
@@ -17,7 +11,8 @@ function showError(message) {
 }
 
 async function getWeather(city, state) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${state},us&appid=5c0006f10b54133c3a28d5e8e80c8dd9`);
+  const units = getUserPrefUnits();
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${state},us&appid=5c0006f10b54133c3a28d5e8e80c8dd9&units=${units}`);
   if (response.status !== 200) {
     throw new Error(`City: '${city}' not found: try another city.`);
   }
@@ -25,6 +20,7 @@ async function getWeather(city, state) {
   console.log(weatherData);
   return weatherData;
 }
+
 function submitWeatherRequest() {
   const cityInput = document.getElementById('city-input');
   const city = cityInput.value.toLowerCase();
