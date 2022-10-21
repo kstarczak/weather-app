@@ -1,13 +1,22 @@
 import './style.css';
 import loadPage from './loadPage';
-import { updatePage, getUserPrefUnits } from './interface';
+import {
+  updatePage, getUserPrefUnits, hideWeatherData, displayWeatherData,
+} from './interface';
 
 loadPage();
 
+function clearError() {
+  const errorDisplay = document.querySelector('.error-display');
+  errorDisplay.textContent = '';
+  errorDisplay.style.display = 'none';
+}
+
 function showError(message) {
-  const allWeatherData = document.querySelectorAll('.weather-data');
-  allWeatherData.forEach((element) => { element.textContent = ''; });
-  document.querySelector('.temperature').textContent = message;
+  hideWeatherData();
+  const errorDisplay = document.querySelector('.error-display');
+  errorDisplay.textContent = message;
+  errorDisplay.style.display = 'block';
 }
 
 async function getWeather(city, state) {
@@ -17,11 +26,13 @@ async function getWeather(city, state) {
     throw new Error(`City: '${city}' not found: try another city.`);
   }
   const weatherData = await response.json();
+  displayWeatherData();
   console.log(weatherData);
   return weatherData;
 }
 
 function submitWeatherRequest() {
+  clearError();
   const cityInput = document.getElementById('city-input');
   const city = cityInput.value.toLowerCase();
   if (city.length < 1) {

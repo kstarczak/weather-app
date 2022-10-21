@@ -1,4 +1,5 @@
 import { abrvStates, lowerCaseStates } from './data';
+import { updatePrefUnits, updatePrefState } from './interface';
 
 const loadPage = () => {
   const content = document.createElement('div');
@@ -31,17 +32,45 @@ const loadPage = () => {
 
   const menu = document.createElement('div');
   menu.className = 'menu';
-  const menuList = document.createElement('ul');
-  const switchUnitsList = document.createElement('li');
-  const switchUnitsLink = document.createElement('a');
-  switchUnitsLink.textContent = 'Change Units';
-  switchUnitsList.append(switchUnitsLink);
-  const aboutList = document.createElement('li');
-  const aboutLink = document.createElement('a');
-  aboutLink.textContent = 'About';
-  aboutList.append(aboutLink);
-  menuList.append(switchUnitsList, aboutList);
-  menu.append(menuList);
+
+  const unitsForm = document.createElement('div');
+  const unitsFormHeader = document.createElement('h1');
+  unitsFormHeader.textContent = 'Preferred Units';
+
+  const imperialLabel = document.createElement('label');
+  imperialLabel.className = 'radio-container';
+  imperialLabel.textContent = 'Fahrenheit || miles/hr';
+  const imperialInput = document.createElement('input');
+  imperialInput.type = 'radio';
+  imperialInput.name = 'units';
+  imperialInput.id = 'imperial';
+  imperialInput.checked = 'checked';
+  const imperialSpan = document.createElement('span');
+  imperialSpan.className = 'checkmark';
+  imperialLabel.append(imperialInput, imperialSpan);
+
+  const metricLabel = document.createElement('label');
+  metricLabel.className = 'radio-container';
+  metricLabel.textContent = 'Celsius || meters/sec';
+  const metricInput = document.createElement('input');
+  metricInput.type = 'radio';
+  metricInput.name = 'units';
+  metricInput.id = 'metric';
+  const metricSpan = document.createElement('span');
+  metricSpan.className = 'checkmark';
+  metricLabel.append(metricInput, metricSpan);
+
+  imperialInput.addEventListener('change', updatePrefUnits);
+  metricInput.addEventListener('change', updatePrefUnits);
+
+  unitsForm.append(unitsFormHeader, imperialLabel, metricLabel);
+
+  const homePageLink = document.createElement('a');
+  homePageLink.textContent = 'Learn more about me!';
+  const gitHubLink = document.createElement('a');
+  gitHubLink.textContent = 'Check out my GitHub';
+
+  menu.append(unitsForm, homePageLink, gitHubLink);
   navBar.append(aboutContainer, searchBarContainer, menu, menuButtonContainer);
   navContainer.appendChild(navBar);
 
@@ -71,8 +100,8 @@ const loadPage = () => {
     stateOption.value = lowerCaseStates[i];
     stateInput.appendChild(stateOption);
     let selectedState;
-    if (localStorage.getItem('userPref')) {
-      // logic to get pref state and set default vselected to true
+    if (localStorage.getItem('userPrefState')) {
+      selectedState = localStorage.getItem('userPrefState');
     } else {
       selectedState = 'new hampshire';
     }
@@ -102,6 +131,9 @@ const loadPage = () => {
   submitButton.addEventListener('click', toggleModal);
   cancelButton.addEventListener('click', toggleModal);
 
+  const errorDisplay = document.createElement('div');
+  errorDisplay.className = 'error-display';
+
   const main = document.createElement('div');
   main.classList.add('main');
 
@@ -115,23 +147,33 @@ const loadPage = () => {
 
   const graphic = document.createElement('div');
   graphic.classList.add('weather-data', 'graphic');
+  const graphicIcon = document.createElement('div');
+  graphicIcon.id = 'graphic-icon';
+  const graphicDesc = document.createElement('div');
+  graphicDesc.className = 'graphic-desc';
+  graphic.append(graphicIcon, graphicDesc);
 
-  const rain = document.createElement('div');
-  rain.classList.add('weather-data', 'rain');
-
-  const wind = document.createElement('div');
-  wind.classList.add('weather-data', 'wind');
+  const details = document.createElement('div');
+  details.classList.add('weather-data', 'details');
 
   const humidity = document.createElement('div');
   humidity.classList.add('weather-data', 'humidity');
 
-  main.append(temperatureContainer, graphic, rain, wind, humidity);
+  const wind = document.createElement('div');
+  wind.classList.add('weather-data', 'wind');
+  const windArrow = document.createElement('div');
+  windArrow.className = 'wind-arrow';
+  const windDesc = document.createElement('div');
+  windDesc.className = 'wind-desc';
+  wind.append(windArrow, windDesc);
+
+  main.append(temperatureContainer, graphic, details, humidity, wind);
 
   const footer = document.createElement('footer');
   footer.textContent = 'Copyright \u00A9 2022 Konrad Starczak';
 
   document.querySelector('body').appendChild(content);
-  content.append(header, navContainer, searchModal, main, footer);
+  content.append(header, navContainer, searchModal, errorDisplay, main, footer);
 
   menuButton.addEventListener('click', () => {
     menu.classList.toggle('menu-open');

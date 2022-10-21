@@ -4,7 +4,6 @@
     opacity: 0.4;
 }
 */
-
 html {
     box-sizing: border-box;
   }
@@ -204,88 +203,26 @@ nav>.search-container {
     opacity:0.7;
     box-shadow: 0 0 8px 4px rgb(165, 80, 23);
 }
-/* 
-label {
-    color: rgb(0, 0, 0);
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-input[type="text"] {
-    font-size: 1.5rem;
-    width: 14rem;
-    background-color: black;
+.error-display {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    font-size: 24px;
+    min-width: 250px;
+    margin: 0 auto;
     color: white;
-    border-radius: 0.5rem;
-    border: 2px solid rgb(88, 88, 88);
-    opacity: 0.7;
-    transition: 0.2s;
+    line-height: 1.25;
+    transform: translateX(-50%);
 }
-input[type="text"]:focus {
-    opacity: 0.9;
-    outline: none;
-    box-shadow: 0 0 8px 2px rgb(248, 119, 68);
-    opacity: 1;
-}
-select {
-    font-size: 1.5rem;
-    background-color: black;
-    color: white;
-    border-radius: 0.5rem;
-    border: 2px solid rgb(88, 88, 88);
-    opacity: 0.7;
-    width: 14rem;
-    transition: 0.1s;
-}
-select:active {
-    border: 2px solid white;
-    outline: none;
-    border: 2px solid white;
-    opacity: 1;
-
-}
-.submit-button {
-    background-color: rgb(3, 68, 153);
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 0.1ch;
-    padding: 0.4rem;
-    width: 14rem;
-    border-radius: 1rem;
-    border: none;
-    box-shadow: 3px 3px 10px rgb(0, 0, 0);
-    transition: 0.3s;
-}
-.submit-button:hover {
-    background-color: rgb(3, 103, 233);
-    transform: translateY(-3px);
-    cursor: pointer;
-}
-
-.weather-data {
-    width: 100%;
-    height: 12rem;
-    font-size: 2rem;
-    background-color: rgb(49, 49, 49);
-    color: white;
-    opacity: 0.7;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 1rem;
-}
-*/
 .main {
     position: relative;
-    display: grid;
+    display: none;
     grid-template: 1fr 1fr 1fr 1fr/ 60% 1fr;
     grid-template-areas:
         "temp graphic"
-        "temp rain"
-        "temp wind"
+        "temp details"
         "temp humidity"
+        "temp wind"
     ;
     gap: 1rem;
     margin: 1rem auto;
@@ -299,26 +236,82 @@ select:active {
     right: 0;
     width: 0;
     height: 90vh;
+    padding-top: 40px;
+    padding-left: 40px;
     overflow: hidden;
     background-color: black;
+    color: white;
     z-index:99;
     transition: all 500ms ease-out;;
+}
+.menu h1{
+    color:white;
+}
+.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color:white;
+}
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+.radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+.radio-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+  
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+.radio-container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+.menu a {
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    color: white;
 }
 .menu.menu-open{
     width: 100vw;
 }
-.menu li {
-    font-size: 24px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: gray;
-}
-.menu li>a {
-    text-decoration: none;
-    color: white;
-}
+
 .temperature-container{
+    min-width: 180px;
+    aspect-ratio: 1;
     grid-area: temp;
     display: flex;
     flex-direction: column;
@@ -326,33 +319,124 @@ select:active {
     justify-content: center;
     border-radius: 50%;
     color: white;
-    background-color: rgba(248, 56, 23, 0.5);
-    backdrop-filter: blur(5px);
+    backdrop-filter: opacity(0.7);
+    box-shadow: 5px 5px 10px 0px rgb(44, 44, 44);
 }
 .temperature {
     font-size: 36px;
     margin-bottom: 1rem;
+    filter: drop-shadow(1px 1px 2px #000);
 }
 .lohi {
+    padding: 5px;;
     font-size: 12px;
+    filter: drop-shadow(1px 1px 2px #000);
 }
 .graphic {
-    background-color: rgb(61, 61, 61);
+    margin-left: -12px;
+    margin-right: 12px;
+    border-radius: 999px;
+    background-color: hsl(0, 0%, 0%, 0.5);
+    box-shadow: 5px 5px 10px 0px rgb(44, 44, 44);
     grid-area: graphic;
+    display: flex;
+    align-items: center;
 }
-.rain {
-    background-color: rgb(22, 78, 163);
-    grid-area: rain;
+#graphic-icon {
+    width: 30px;
+    min-height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
 }
-.wind {
-    background-color: white;
-    grid-area: wind;
+.thunderstorm {
+    background-image: url('cloud-bolt-solid.svg');
 }
-.humidity {
-    background-color: aqua;
-    grid-area: humidity;
+.raining {
+    background-image: url('cloud-showers-heavy-solid.svg');
+}
+.snow{
+    background-image: url('snowflake-regular.svg');
+}
+.atmosphere {
+    background-image: url('cloud-solid.svg');
+}
+.clouds {
+    background-image: url('cloud-solid.svg');
+}
+.clear {
+    background-image: url('sun-solid.svg');
 }
 
+.graphic-Desc {
+    font-size: 12px;
+    filter: drop-shadow(1px 1px 2px #000);
+}
+.details{
+    margin-left: 10px;
+    padding-left: 8px;
+    padding-top: 8px;
+    border-radius: 999px;
+    background-color: hsl(216, 42%, 52%, 0.8);
+    box-shadow: 5px 5px 10px 0px rgb(44, 44, 44);
+    grid-area: details;
+    font-size: clamp(6px, 12px, 14px);
+    color: rgb(216, 216, 216);
+    filter: drop-shadow(1px 1px 2px #000);
+    overflow: hidden;
+}
+.humidity {
+    margin-left: 10px;
+    padding-left: 20px;
+    padding-top: 10px;
+    border-radius: 999px;
+    background-color: hsl(192, 55%, 70%, 0.8);
+    box-shadow: 5px 5px 10px 0px rgb(44, 44, 44);
+    grid-area: humidity;
+    font-size: 11px;
+    color: rgb(27, 27, 27);
+    position: relative;
+}
+.humidity::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: -4px;
+    width: 30px;
+    min-height: 30px;
+    background-image: url('drop.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+}
+.wind {
+    padding: 5px;;
+    margin-left: -12px;
+    margin-right: 12px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 5px 5px 10px 0px rgb(44, 44, 44);
+    grid-area: wind;
+    display: flex;
+    align-items: center;
+
+}
+.wind-arrow {
+    width: 20px;
+    height: 20px;
+    background-color: hsl(0, 0%, 100%, 0.4);
+    background-image: url('location-arrow-solid.svg');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    border: 1px solid rgb(80, 80, 80);
+    margin-right: 4px;
+}
+.wind-desc {
+    font-size: 12px;
+    color: rgb(43, 43, 43);
+}
 footer {
     background-color: black;
     color: rgb(255, 241, 180);
