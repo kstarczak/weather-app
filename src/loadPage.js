@@ -34,6 +34,7 @@ const loadPage = () => {
   menu.className = 'menu';
 
   const unitsForm = document.createElement('div');
+  unitsForm.className = 'menu-form';
   const unitsFormHeader = document.createElement('h1');
   unitsFormHeader.textContent = 'Preferred Units';
 
@@ -67,8 +68,10 @@ const loadPage = () => {
 
   const homePageLink = document.createElement('a');
   homePageLink.textContent = 'Learn more about me!';
+  homePageLink.href = 'https://konradstar.dev/';
   const gitHubLink = document.createElement('a');
   gitHubLink.textContent = 'Check out my GitHub';
+  gitHubLink.href = 'https://github.com/kstarczak';
 
   menu.append(unitsForm, homePageLink, gitHubLink);
   navBar.append(aboutContainer, searchBarContainer, menu, menuButtonContainer);

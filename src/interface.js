@@ -17,7 +17,6 @@ const getUserPrefUnits = () => {
 const updatePrefUnits = (e) => {
   const prefUnits = e.target.id;
   localStorage.setItem('userPrefUnits', prefUnits);
-  console.log(prefUnits);
 };
 
 const updatePrefState = (prefState) => {
@@ -58,7 +57,7 @@ const updatePage = (data) => {
   function getGraphicClass(conditionCode) {
     let graphicClass;
     if (conditionCode < 300) {
-      graphicClass = 'thunderstorm'
+      graphicClass = 'thunderstorm';
     } else if (conditionCode < 600) {
       graphicClass = 'raining';
     } else if (conditionCode < 700) {

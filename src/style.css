@@ -24,7 +24,7 @@ body {
 }
 .header {
     width: 100%;
-    font-size: 1.8rem;
+    font-size: 24px;
     font-weight: 700;
     padding: 0.75rem 0.75rem 0rem;
     text-align: center;
@@ -237,7 +237,6 @@ nav>.search-container {
     width: 0;
     height: 90vh;
     padding-top: 40px;
-    padding-left: 40px;
     overflow: hidden;
     background-color: black;
     color: white;
@@ -246,6 +245,9 @@ nav>.search-container {
 }
 .menu h1{
     color:white;
+}
+.menu-form {
+    padding: 1rem;
 }
 .radio-container {
     display: block;
@@ -259,6 +261,7 @@ nav>.search-container {
     -ms-user-select: none;
     user-select: none;
     color:white;
+    overflow: hidden;
 }
 .radio-container input {
     position: absolute;
@@ -300,10 +303,18 @@ nav>.search-container {
     background: white;
 }
 .menu a {
+    color: rgb(243, 201, 146);
     text-decoration: none;
     display: block;
-    font-size: 20px;
-    color: white;
+    font-size: 22px;
+    padding: 1rem;
+    overflow: hidden;
+    background-color: rgb(54, 54, 54);
+    border-radius: 20px;
+}
+.menu a {
+    transform: scale(1.125);
+    box-shadow: 0 0 8px 4px rgb(165, 80, 23);
 }
 .menu.menu-open{
     width: 100vw;
