@@ -38,6 +38,8 @@ const loadPage = () => {
   const unitsFormHeader = document.createElement('h1');
   unitsFormHeader.textContent = 'Preferred Units';
 
+  const labelContainer = document.createElement('div');
+  labelContainer.className = 'label-container';
   const imperialLabel = document.createElement('label');
   imperialLabel.className = 'radio-container';
   imperialLabel.textContent = 'Fahrenheit || miles/hr';
@@ -64,7 +66,9 @@ const loadPage = () => {
   imperialInput.addEventListener('change', updatePrefUnits);
   metricInput.addEventListener('change', updatePrefUnits);
 
-  unitsForm.append(unitsFormHeader, imperialLabel, metricLabel);
+  labelContainer.append(imperialLabel, metricLabel);
+
+  unitsForm.append(unitsFormHeader, labelContainer);
 
   const homePageLink = document.createElement('a');
   homePageLink.textContent = 'Learn more about me!';

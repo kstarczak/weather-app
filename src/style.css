@@ -21,6 +21,8 @@ body {
     flex-direction: column;
     background-image: url('constant-loubier-eWuc6TXc8Ok-unsplash.jpg');
     background-size: cover;
+    position: relative;
+    overflow: hidden;
 }
 .header {
     width: 100%;
@@ -45,8 +47,8 @@ nav {
 }
 .about-button {
     display:block;
-    width: 40px;
-    min-height: 40px;
+    width: 32px;
+    min-height: 32px;
     background-color: rgb(177, 177, 177);
     background-image: url("info-solid.svg");
     background-size: 25%;
@@ -88,8 +90,8 @@ nav>.search-container {
     z-index: 999;
 }
 .menu-button{
-    width: 40px;
-    min-height: 40px;
+    width: 32px;
+    min-height: 32px;
     background-color: rgb(177, 177, 177);
     background-image: url("bars-solid.svg");
     background-size: 70%;
@@ -107,9 +109,9 @@ nav>.search-container {
 }
 .search-modal {
     max-width: 600px;
-    height: 60vh;
+    min-height: 300px;
     position: absolute;
-    top: 65px;;
+    top: 55px;;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgb(252, 244, 230);
@@ -233,26 +235,39 @@ nav>.search-container {
 .menu {
     position: absolute;
     top: 48px;
-    right: 0;
-    width: 0;
-    height: 90vh;
+    left: 0;
+    width: 100vw;
+    transform: translateX(100%);
+    height: calc(100vh - 50px);
     padding-top: 40px;
     overflow: hidden;
     background-color: black;
     color: white;
     z-index:99;
-    transition: all 500ms ease-out;;
+    transition: all 500ms ease-out;
+    font-size: 22px;
 }
-.menu h1{
-    color:white;
+.menu.menu-open{
+    transform: translateX(0);
 }
 .menu-form {
-    padding: 1rem;
+    margin: 0.5rem auto;
+    max-width: 250px;
+}
+.menu h1{
+    padding: 0.5rem;
+    margin: 0 0 1rem;
+    max-width: 250px;
+    border-radius: 10px;
+    color: rgb(243, 201, 146);
+    font-size: inherit;
+    background-color: hsl(0, 0%, 23%);
+    opacity: 0.6;
 }
 .radio-container {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 45px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 20px;
@@ -261,7 +276,8 @@ nav>.search-container {
     -ms-user-select: none;
     user-select: none;
     color:white;
-    overflow: hidden;
+    max-width: 250px;
+    font-size: 18px;
 }
 .radio-container input {
     position: absolute;
@@ -271,9 +287,9 @@ nav>.search-container {
 .checkmark {
     position: absolute;
     top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
+    left:15px;
+    height: 20px;
+    width: 20px;
     background-color: #eee;
     border-radius: 50%;
 }
@@ -295,8 +311,8 @@ nav>.search-container {
     display: block;
 }
 .radio-container .checkmark:after {
-    top: 9px;
-    left: 9px;
+    top: 6px;
+    left: 6px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -306,18 +322,19 @@ nav>.search-container {
     color: rgb(243, 201, 146);
     text-decoration: none;
     display: block;
-    font-size: 22px;
-    padding: 1rem;
-    overflow: hidden;
-    background-color: rgb(54, 54, 54);
-    border-radius: 20px;
+    font-size: inherit;
+    padding: 0.5rem;
+    margin: 1rem auto;
+    background-color: hsl(0, 0%, 23%);
+    opacity: 0.6;
+    border-radius: 10px;
+    max-width: 250px;
+    text-align: center;
+    transition: all 200ms;
 }
-.menu a {
-    transform: scale(1.125);
-    box-shadow: 0 0 8px 4px rgb(165, 80, 23);
-}
-.menu.menu-open{
-    width: 100vw;
+.menu a:hover {
+    transform: scale(1.0125);
+    opacity: 1;
 }
 
 .temperature-container{
@@ -385,7 +402,7 @@ nav>.search-container {
 }
 .details{
     margin-left: 10px;
-    padding-left: 8px;
+    text-align: center;
     padding-top: 8px;
     border-radius: 999px;
     background-color: hsl(216, 42%, 52%, 0.8);
@@ -457,6 +474,75 @@ footer {
     width: 100vw;
     padding: 1rem;
     text-align: center;
+}
+
+@media (min-width: 480px) {
+    .menu-button-container{
+        display: none;
+    }
+    nav {
+        flex-wrap: wrap;
+    }
+    .search-button {
+        width:  360px;
+        margin: auto 32px auto auto;
+    }
+    .menu {
+        padding-top: 0;
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100vw;
+        height: auto;
+        transform: translateX(0);
+        display: flex;
+        font-size: 14px;
+    }
+    body .menu-form {
+        margin:0;
+    }
+    body .menu .label-container {
+        position: absolute;
+        top: 5px;
+        left: -15px;
+        height: 0;
+        font-size: 12px;
+        z-index: 10;
+        overflow: hidden;
+        transition: all 200ms;
+    }
+    body .menu-form:hover .label-container {
+        height: 70px;
+        padding: 0.5rem;
+        background: rgb(20 20 20);
+        border-radius: 5px; 
+    }
+    body .menu h1 {
+        margin: 0.5rem auto;
+        flex:1;
+        border-radius:0;
+        position: relative;
+    }
+    body .menu a {
+        margin: 0.5rem auto;
+        border-radius: 0;
+        flex: 1;
+    }
+    body .radio-container {
+        font-size: 11px;
+    }
+    body .checkmark{
+        height: 12px;
+        width: 12px;
+    }
+    body .checkmark:after{
+        top: 3px;
+        left: 3px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: white;
+    }
 }
 
 
