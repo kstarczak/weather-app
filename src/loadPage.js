@@ -176,11 +176,22 @@ const loadPage = () => {
 
   main.append(temperatureContainer, graphic, details, humidity, wind);
 
+  const locationAndDate = document.createElement('div');
+  locationAndDate.className = 'location-date';
+  const location = document.createElement('p');
+  location.className = 'location';
+  const date = document.createElement('p');
+  date.className = 'date';
+  locationAndDate.append(location, date);
+
   const footer = document.createElement('footer');
-  footer.textContent = 'Copyright \u00A9 2022 Konrad Starczak';
+  const footerLink = document.createElement('a');
+  footerLink.textContent = 'Copyright \u00A9 2022 Konrad Starczak';
+  footerLink.href = 'https://konradstar.dev/';
+  footer.appendChild(footerLink);
 
   document.querySelector('body').appendChild(content);
-  content.append(header, navContainer, searchModal, errorDisplay, main, footer);
+  content.append(header, navContainer, searchModal, errorDisplay, main, locationAndDate, footer);
 
   menuButton.addEventListener('click', () => {
     menu.classList.toggle('menu-open');

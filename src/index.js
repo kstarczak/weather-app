@@ -27,7 +27,6 @@ async function getWeather(city, state) {
   }
   const weatherData = await response.json();
   displayWeatherData();
-  console.log(weatherData);
   return weatherData;
 }
 

@@ -1,4 +1,5 @@
 /* ToDo: Add function to get select day or night icons
+//get sunrise and sunset data from API request
 function dayOrNight(sunrise, sunset) {
   const currentTime = new Date();
   if (currentTime > sunrise && currentTime <)
@@ -45,12 +46,18 @@ const updatePage = (data) => {
   const windDesc = document.querySelector('.wind-desc');
   const windArrow = document.querySelector('.wind-arrow');
   const humidity = document.querySelector('.humidity');
+  const location = document.querySelector('.location');
+  const date = document.querySelector('.date');
   const temp = Math.round(tempData.main.temp);
   const lowTemp = Math.round(tempData.main.temp_min);
   const hiTemp = Math.round(tempData.main.temp_max);
   const windSpeed = Math.round(tempData.wind.speed);
   const windDeg = tempData.wind.deg;
   const humidityPercentage = tempData.main.humidity;
+  const city = tempData.name;
+  const { country } = tempData.sys;
+  const queryDate = new Date((tempData.dt) * 1000);
+  const formattedDate = queryDate.toLocaleString();
 
   // API conditions return a numerical value that corresponds to weather conditons
   // such as rain, snow, etc. see list at https://openweathermap.org/current#list
@@ -119,16 +126,22 @@ const updatePage = (data) => {
   windDesc.textContent = `${windSpeed} ${speedUnit} winds`;
   windArrow.style.transform = `rotate(${corrrectedArrowRotatation}deg)`;
   humidity.textContent = `${humidityPercentage}% humidity`;
+  location.textContent = `${city}, ${country}`;
+  date.textContent = formattedDate;
 };
 
 const hideWeatherData = () => {
   const weatherData = document.querySelector('.main');
   weatherData.style.display = 'none';
+  const otherData = document.querySelector('.location-date');
+  otherData.style.display = 'none';
 };
 
 const displayWeatherData = () => {
   const weatherData = document.querySelector('.main');
   weatherData.style.display = 'grid';
+  const otherData = document.querySelector('.location-date');
+  otherData.style.display = 'block';
 };
 
 export {
